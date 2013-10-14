@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">نقاش خانه</string>
+    <string name="action_settings">تنظیمات</string>
+    <string name="WelcomeMessage"> .برنامه برای راه اندازی شدن نیاز به نصب اولیه اطلاعات نمونه دارد. لطفا ارتباط خود را با اینترنت برقرار نمایید تا برنامه گوشه ای از اطلاعات  را در بسته اولیه دانلود نماید. شما بعدا خواهید توانست داده های بیشتری را از طریق سرور برنامه دریافت نمایید و به صورت تدریجی اطلاعات برنامه خود را در هر هنگام که نیاز دارید آپدیت نمایید</string>
+    <string name="download">دانلود</string>
+    <string name="instruction">برای دریافت اطلاعات اولیه بر روی دکمه زیر کلیک نمایید تا برنامه اطلاعات اولیه را از سرور های برنامه دریافت نموده و بر روی نرم افزار شما ثبت نماید</string>
+    <string name="getMorePaintings">دریافت نقاشی های بیشتر</string>
+    <string name="RepaitItem">ترمیم این مورد</string>  
+    <string name="RepaitAllItems">بررسی و ترمیم تمامی موارد </string>
+    <string name="PlzeLongClick">انگشت خود را بر روی آیتم مورد نظر بیشتر نگه دارید.</string>
+    <string name="heartNegetive">حذف از مورد علاقه</string>  
+    <string name="heartPositive">اضافه به مورد علاقه</string>   
+</resources>

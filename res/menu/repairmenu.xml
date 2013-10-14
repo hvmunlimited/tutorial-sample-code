@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+ 
+<item android:id="@+id/RepairItem"
+android:title="@string/RepaitItem" />
+ 
+<item android:id="@+id/RepairAllItems"
+android:title="@string/RepaitAllItems" />
+ 
+</menu>

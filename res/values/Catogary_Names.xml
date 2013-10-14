@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name_animals">نقاشی حیوانات </string>
+    <string name="name_automobile">نقاشی اتوموبیل </string>
+    <string name="name_cartoon">نقاشی کارتون </string>
+    <string name="name_dionasours">نقاشی دایناسور </string>
+    <string name="name_dragon">نقاشی اژدها </string>
+    <string name="name_fantasy">نقاشی فانتزی </string>
+    <string name="name_flower">نقاشی گل ها </string>
+    <string name="name_people">نقاشی چهره </string>
+    
+</resources>

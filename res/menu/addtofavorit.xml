@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+ 
+<item android:id="@+id/AddtoFav"
+    android:icon="@drawable/heartplus"
+	android:title="@string/heartPositive" />
+ 
+<item android:id="@+id/RemoveFromFav"
+   	android:icon="@drawable/heartnegetive"
+	android:title="@string/heartNegetive" />
+ 
+</menu>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="animals">http://tebadi.com/nagashixml/animals.xml</string>
+    <string name="automobile">http://tebadi.com/nagashixml/automobile.xml</string>
+    <string name="cartoon">http://tebadi.com/nagashixml/cartoon.xml</string>
+    <string name="dionasours">http://tebadi.com/nagashixml/dionasours.xml</string>
+    <string name="dragon">http://tebadi.com/nagashixml/dragon.xml</string>
+    <string name="fantasy">http://tebadi.com/nagashixml/fantasy.xml</string>
+    <string name="flowers">http://tebadi.com/nagashixml/flowers.xml</string>
+    <string name="people">http://tebadi.com/nagashixml/people.xml</string>
+    <string name="baseDir">http://tebadi.com/nagashixml/</string>
+    <string name="PathInSD">listwithmore/pictures</string>
+    
+</resources>

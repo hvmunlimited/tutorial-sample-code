@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pic_animals">animals </string>
+    <string name="pic_automobile">cars </string>
+    <string name="pic_cartoon">cartoons </string>
+    <string name="pic_dionasours">dionasours </string>
+    <string name="pic_dragon">dragons </string>
+    <string name="pic_fantasy">fantasy </string>
+    <string name="pic_flower">flowers </string>
+    <string name="pic_people">people </string>
+    
+</resources>

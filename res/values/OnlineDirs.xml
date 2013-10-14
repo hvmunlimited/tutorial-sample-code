@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name= "animalsOnlineDir"> animals</string>
+    <string name= "automobileOnlineDir"> automobile</string>
+    <string name= "cartoonOnlineDir"> cartoon</string>
+    <string name= "dionasoursOnlineDir"> dionasours</string>
+    <string name= "dragonOnlineDir"> dragon</string>
+    <string name= "fantasyOnlineDir"> fantasy</string>
+    <string name= "flowersOnlineDir"> flowers</string>
+    <string name= "peopleOnlineDir"> people</string>
+</resources>
