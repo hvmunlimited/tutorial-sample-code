@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import android.app.Activity;
-import android.content.ClipData.Item;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -42,6 +42,8 @@ public class Description extends Activity {
 	MainActivity MA= new MainActivity();
 
 	String thumbPic , DescriptionXML;
+	
+	int FaveState;
 
 	
 	 @Override
@@ -60,7 +62,7 @@ public class Description extends Activity {
 		
 		
 		SelectedItemNum =getIntent().getExtras().getInt("SelectedItemNum");
-		ListPosition =getIntent().getExtras().getInt("ListPosition");
+		ListPosition =getIntent().getExtras().getInt("Listposition");
 		
 		OnlineDir =getIntent().getExtras().getString("OnlineDir");
 		RealPath= Environment.getExternalStorageDirectory().toString()+"/"+PathInSD+"/"+OnlineDir+"/"+SelectedItemNum;
@@ -175,6 +177,7 @@ public class Description extends Activity {
 				}
 			 
 			 item.setEnabled(false);
+			 FaveState=0;
 			break;
 		case R.id.RemoveFromFav:
 			try {
@@ -192,6 +195,7 @@ public class Description extends Activity {
 			}
 			
 			 item.setEnabled(false);
+			 FaveState=1;
 			break;
 
 		default:
@@ -206,8 +210,9 @@ public class Description extends Activity {
 			try {
 				if (new Scanner(f).hasNext()) {
 					String FaveFile = new Scanner(f).useDelimiter("\\A").next();
-					String[] Exist= FaveFile.split("<thumb_url>"+thumbPic+"</thumb_url>\n<XML>"+DescriptionXML+"</XML>\n");
-					if (Exist.length>1) {
+					String[] Exist= FaveFile.split("<thumb_url>"+thumbPic+"</thumb_url>\n<xmlfile>"+DescriptionXML+"</xmlfile>\n");
+					String[] Check= FaveFile.split(">"+thumbPic);
+					if (Check.length>1) {
 						return true;
 					}
 					else{
@@ -229,7 +234,7 @@ public class Description extends Activity {
 				try {
 					if (new Scanner(f).hasNext()) {
 						String FaveFile = new Scanner(f).useDelimiter("\\A").next();
-						String[] Exist= FaveFile.split("<thumb_url>"+thumbPic+"</thumb_url>\n<XML>"+DescriptionXML+"</XML>\n");
+						String[] Exist= FaveFile.split("<thumb_url>"+thumbPic+"</thumb_url>\n<xmlfile>"+DescriptionXML+"</xmlfile>\n");
 						
 						for (int i = 0; i < Exist.length; i++) {
 							NewText+=Exist[i];
@@ -241,4 +246,18 @@ public class Description extends Activity {
 				}
 			return NewText;
 		}
+ 	@Override
+ 	public void onBackPressed() {
+ 		finish();
+ 		super.onBackPressed();
+ 	}
+ 	@Override
+ 	public void finish() {
+ 	  // Prepare data intent 
+ 	  Intent data = new Intent();
+ 	  data.putExtra("FaveState", FaveState);
+ 	  // Activity finished ok, return the data
+ 	  setResult(RESULT_OK, data);
+ 	  super.finish();
+ 	} 
 }
