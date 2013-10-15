@@ -28,7 +28,7 @@ public class FaveActivity extends Activity {
 	ArrayList<String> OnlineDirs=new ArrayList<String>();
 	ArrayList<String> Pathes=new ArrayList<String>();
 	ArrayList<String> Positions=new ArrayList<String>();
-	
+	int LISTPOSITION;
 
 	
 	
@@ -68,12 +68,13 @@ public class FaveActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> paramAdapterView,
 						View paramView, int Listposition, long paramLong) {
+					LISTPOSITION=Listposition;
 					Intent intent = new Intent(FaveActivity.this, Description.class);
 					intent.putExtra("SelectedItemNum", Integer.parseInt(Positions.get(Listposition)));
 					intent.putExtra("OnlineDir", OnlineDirs.get(Listposition));
 					intent.putExtra("Listposition", Listposition);
 					intent.putExtra("thumbs", UseElements.ArrayListToStringArray(names));
-					startActivity(intent);
+					startActivityForResult(intent, 0);
 					
 				}
 			});
@@ -99,6 +100,21 @@ public class FaveActivity extends Activity {
 			return false;
 		}
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//make refresh if some of items have been removed from a favorite list or some of items have been repaired!
+		if (resultCode== RESULT_OK & data.getExtras().getInt("FaveState")==1) {
+			names.remove(LISTPOSITION);
+			Pathes.remove(LISTPOSITION);
+			Positions.remove(LISTPOSITION);
+		}
+
+			AA.PictureGrid(UseElements.ArrayListToStringArray(names), UseElements.ArrayListToStringArray(Pathes),UseElements.ArrayListToStringArray(Positions) ,gridview, MyApplicationContext.getAppContext());
+
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
 }
 
 
