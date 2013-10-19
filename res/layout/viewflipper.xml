@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/teaser0" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/teaser1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/teaser2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/teaser3" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/teaser4" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/teaser5" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/teaser6" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/teaser7" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/teaser8" />
+        </RelativeLayout>
+
+    </ViewFlipper>
+
+</RelativeLayout>

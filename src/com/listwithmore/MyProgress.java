@@ -30,7 +30,7 @@ public class MyProgress {
 		int DownloadListLength;
 		String path, ONLINEDIR;
 		SharedPreferences prefs= MyApplicationContext.getAppContext().getSharedPreferences(Wizard.PREFCOUNTS, 0);
-		SharedPreferences.Editor editor = prefs.edit();
+//		SharedPreferences.Editor editor = prefs.edit();
 		ArrayList<String> LINKSARRAY= new ArrayList<String>();
 		MainPage MP= new MainPage();
 		FileOperations fo = new FileOperations();
@@ -86,8 +86,8 @@ public class MyProgress {
 							
 							LINKSARRAY = MP.getLINKS();
 							
-							editor.putInt(LINKSARRAY.get(Wizard.getSpinnerPosition()),multiple);
-							editor.commit();
+//							editor.putInt(LINKSARRAY.get(Wizard.getSpinnerPosition()),multiple);
+//							editor.commit();
 							
 							
 							progressBarHandler.post(new Runnable() {

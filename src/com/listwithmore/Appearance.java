@@ -1,11 +1,15 @@
 package com.listwithmore;
 
-import android.R.drawable;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.Notification.Builder;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
@@ -40,5 +44,16 @@ public class Appearance extends TabActivity {
 		alert.show();
 	}
 	
+	public void makeNotification(String Title,String Subject, int Icon, boolean Cancalable, PendingIntent pIntent,Context context){
+		NotificationManager notificationManager = (NotificationManager) 
+				context.getSystemService(NOTIFICATION_SERVICE); 
+		Notification n  = new NotificationCompat.Builder(context)
+        .setContentTitle(Title)
+        .setContentText(Subject)
+        .setSmallIcon(Icon)
+        .setContentIntent(pIntent)
+        .setAutoCancel(true).build();
 
+		notificationManager.notify(1, n); 
+	}
 }
