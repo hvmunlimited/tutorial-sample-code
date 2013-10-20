@@ -41,26 +41,26 @@ public class MainPage extends Activity  {
 
 	int id;
 	
-	ServiceConnection mServiceConn = new ServiceConnection() {
-		
-		@Override
-		public void onServiceDisconnected(ComponentName arg0) {
-			mService = null;
-			
-		}
-		
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			mService = IInAppBillingService.Stub.asInterface(service);
-			
-		}
-	};
-	
+//	ServiceConnection mServiceConn = new ServiceConnection() {
+//		
+//		@Override
+//		public void onServiceDisconnected(ComponentName arg0) {
+//			mService = null;
+//			
+//		}
+//		
+//		@Override
+//		public void onServiceConnected(ComponentName name, IBinder service) {
+//			mService = IInAppBillingService.Stub.asInterface(service);
+//			
+//		}
+//	};
+//	
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		bindService(new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND"), mServiceConn, Context.BIND_AUTO_CREATE);
+//		bindService(new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND"), mServiceConn, Context.BIND_AUTO_CREATE);
 //		prefEditor.putBoolean("isFirst", false);
 //		prefEditor.commit();
 		// TODO Auto-generated method stub
@@ -199,13 +199,13 @@ public class MainPage extends Activity  {
 				}
 			}
 			//bazaar items
-			try {
-				skuDetails = mService.getSkuDetails(3, 
-				getPackageName(), "inapp", querySkus);
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				skuDetails = mService.getSkuDetails(3, 
+//				getPackageName(), "inapp", querySkus);
+//			} catch (RemoteException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			//end
 			return null;
 		}
@@ -228,45 +228,45 @@ public class MainPage extends Activity  {
 			}
 			//bazaar stuff
 			
-			if (skuDetails == null) {
-				
-			}
-			else{
-				int response = skuDetails.getInt("RESPONSE_CODE");
-				intent.putExtra("response", response);
-				   
-				if (response == 0) {
-					ArrayList<String> responseList = skuDetails.getStringArrayList("DETAILS_LIST");
-					ArrayList<String> titles = new ArrayList<String>();
-					ArrayList<String> descriptions = new ArrayList<String>();
-					ArrayList<String> prices = new ArrayList<String>();
-					ArrayList<String> skus = new ArrayList<String>();
-					
-				   for (String thisResponse : responseList) {
-				      JSONObject object;
-					try {
-						object = new JSONObject(thisResponse);
-						String sku = object.getString("productId");
-						String title = object.getString("title");
-				        String price = object.getString("price");
-				        String description= object.getString("description");
-				        skus.add(sku);
-				        titles.add(title);
-				        prices.add(price);
-				        descriptions.add(description);
-				        
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				   }
-				   intent.putExtra("titles", titles);
-				   intent.putExtra("prices", prices);
-				   intent.putExtra("descriptions", descriptions);
-				   intent.putExtra("skus", skus);
-				    
-				}
-			}
+//			if (skuDetails == null) {
+//				
+//			}
+//			else{
+//				int response = skuDetails.getInt("RESPONSE_CODE");
+//				intent.putExtra("response", response);
+//				   
+//				if (response == 0) {
+//					ArrayList<String> responseList = skuDetails.getStringArrayList("DETAILS_LIST");
+//					ArrayList<String> titles = new ArrayList<String>();
+//					ArrayList<String> descriptions = new ArrayList<String>();
+//					ArrayList<String> prices = new ArrayList<String>();
+//					ArrayList<String> skus = new ArrayList<String>();
+//					
+//				   for (String thisResponse : responseList) {
+//				      JSONObject object;
+//					try {
+//						object = new JSONObject(thisResponse);
+//						String sku = object.getString("productId");
+//						String title = object.getString("title");
+//				        String price = object.getString("price");
+//				        String description= object.getString("description");
+//				        skus.add(sku);
+//				        titles.add(title);
+//				        prices.add(price);
+//				        descriptions.add(description);
+//				        
+//					} catch (JSONException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				   }
+//				   intent.putExtra("titles", titles);
+//				   intent.putExtra("prices", prices);
+//				   intent.putExtra("descriptions", descriptions);
+//				   intent.putExtra("skus", skus);
+//				    
+//				}
+//			}
 			   
 			   //end
 			
@@ -317,9 +317,9 @@ public class MainPage extends Activity  {
 
 	public void onDestroy() {
 	    super.onDestroy();
-	    if (mServiceConn != null) {
-	        unbindService(mServiceConn);
-	    }   
+//	    if (mServiceConn != null) {
+//	        unbindService(mServiceConn);
+//	    }   
 	}
 }
 	

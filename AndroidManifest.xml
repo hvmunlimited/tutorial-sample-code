@@ -36,7 +36,7 @@
         <activity android:name=".SecondActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".FaveActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".MainPage" android:screenOrientation="portrait"></activity>
-        <activity android:name=".purchase" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Purchases_test" android:screenOrientation="portrait"></activity>
         
         <receiver
             android:name=".NetworkChangeReceiver"

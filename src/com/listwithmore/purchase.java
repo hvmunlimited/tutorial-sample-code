@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.content.ServiceConnection;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -34,7 +35,8 @@ public class purchase extends Activity {
 	AssignArray AA= new AssignArray();
 	Context C= purchase.this;
 	ListView lv_purchases;
-	
+	int packages_num;
+	Context mContext= purchase.this; 
 	
 	ServiceConnection mServiceConn = new ServiceConnection() {
 		
@@ -56,8 +58,9 @@ public class purchase extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.purchase);
 //		new getPurchableItems().execute();
-		bindService(new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND"), mServiceConn, Context.BIND_AUTO_CREATE);
-		
+		Intent bazaarList= new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND");
+		mContext.bindService(bazaarList, mServiceConn, Context.BIND_AUTO_CREATE);
+//		
 		
 		lv_purchases= (ListView) findViewById(R.id.lv_purchases);
 		UseElements UE= new UseElements();
@@ -65,12 +68,12 @@ public class purchase extends Activity {
 		TextView tv_available_package_name= (TextView) findViewById(R.id.tv_available_package_name);
 		
 		
-		int response = getIntent().getExtras().getInt("response");
+//		int response = getIntent().getExtras().getInt("response");
 		int SpinnerPosition = getIntent().getExtras().getInt("SpinnerPosition");
 		int available_count = getIntent().getExtras().getInt("available_count");
 		
 		
-		int packages_num= ((int)Math.round(available_count/Wizard.FREE_NUMBERS));
+		packages_num= ((int)Math.round(available_count/Wizard.FREE_NUMBERS));
 		ArrayList<String> Purchabale_items= new ArrayList<String>();
 		
 		
@@ -78,28 +81,33 @@ public class purchase extends Activity {
 		
 		tv_available_package_name.setText("بسته های قابل دانلود برای "+CatNames.get(SpinnerPosition));
 		
-		if (response==0) {
-			ArrayList<String> skus = getIntent().getExtras().getStringArrayList("skus");
-			ArrayList<String> titles = getIntent().getExtras().getStringArrayList("titles");
-			ArrayList<String> prices = getIntent().getExtras().getStringArrayList("prices");
-			ArrayList<String> descriptions = getIntent().getExtras().getStringArrayList("descriptions");
-			Collections.reverse(skus);
-			Collections.reverse(titles);
-			Collections.reverse(prices);
-			Collections.reverse(descriptions);
-			ArrayList<String> sss= new ArrayList<String>(titles.subList(0, packages_num));
-			if (packages_num > skus.size()) {
-				packages_num= skus.size();
-			}
-			AA.PictureList(UE.ArrayListToStringArray(new ArrayList<String>(titles.subList(0, packages_num))), UE.ArrayListToStringArray(new ArrayList<String>(descriptions.subList(0, packages_num))), UE.ArrayListToStringArray(new ArrayList<String>(prices.subList(0, packages_num))), lv_purchases, C);
-		    skuList= skus;
-		}
-		else{
-			Appearance APP = new Appearance();
-			APP.alertWithOneButton("asdasd", "sadasdasd", MyApplicationContext.getAppContext(), R.drawable.cars, "ok");
-		}
 		
 		
+		
+		
+		
+//		if (response==0) {
+//			ArrayList<String> skus = getIntent().getExtras().getStringArrayList("skus");
+//			ArrayList<String> titles = getIntent().getExtras().getStringArrayList("titles");
+//			ArrayList<String> prices = getIntent().getExtras().getStringArrayList("prices");
+//			ArrayList<String> descriptions = getIntent().getExtras().getStringArrayList("descriptions");
+//			Collections.reverse(skus);
+//			Collections.reverse(titles);
+//			Collections.reverse(prices);
+//			Collections.reverse(descriptions);
+//			ArrayList<String> sss= new ArrayList<String>(titles.subList(0, packages_num));
+//			if (packages_num > skus.size()) {
+//				packages_num= skus.size();
+//			}
+//			AA.PictureList(UE.ArrayListToStringArray(new ArrayList<String>(titles.subList(0, packages_num))), UE.ArrayListToStringArray(new ArrayList<String>(descriptions.subList(0, packages_num))), UE.ArrayListToStringArray(new ArrayList<String>(prices.subList(0, packages_num))), lv_purchases, C);
+//		    skuList= skus;
+//		}
+//		else{
+//			Appearance APP = new Appearance();
+//			APP.alertWithOneButton("asdasd", "sadasdasd", MyApplicationContext.getAppContext(), R.drawable.cars, "ok");
+//		}
+		
+		new getPurchableItems().execute();
 		  
 		lv_purchases.setOnItemClickListener(new OnItemClickListener() {
 
@@ -131,77 +139,99 @@ public class purchase extends Activity {
 	
 	
 	
-//	public class getPurchableItems extends AsyncTask{
-//		
+	public class getPurchableItems extends AsyncTask{
+		
 //		ProgressDialog pds=new ProgressDialog(C);
-//		
-//		@Override
-//		protected void onPreExecute() {
-//			
+		
+		@Override
+		protected void onPreExecute() {
+			
 //			pds.setCancelable(true);
 //			pds.setMessage("Loading ...");
 //			pds.show();
-//			
-//			skuList.add("One");
-////			skuList.add("zzzz");
-//			querySkus.putStringArrayList("ITEM_ID_LIST", skuList);
-//			
-//			super.onPreExecute();
-//		}
-//		
-//		@Override
-//		protected Object doInBackground(Object... paramArrayOfParams) {
-////			android.os.Debug.waitForDebugger();
-//			try {
-//				skuDetails = mService.getSkuDetails(3, 
-//				getPackageName(), "inapp", querySkus);
-//			} catch (RemoteException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			return null;
-//		}
-//		
-//		@Override
-//		protected void onPostExecute(Object result) {
-//			int response = skuDetails.getInt("RESPONSE_CODE");
-//			if (response == 0) {
-//				ArrayList<String> responseList = skuDetails.getStringArrayList("DETAILS_LIST");
-//				ArrayList<String> titles = new ArrayList<String>();
-//				ArrayList<String> descriptions = new ArrayList<String>();
-//				ArrayList<String> prices = new ArrayList<String>();
-//				ArrayList<String> skus = new ArrayList<String>();
-//				
-//			   for (String thisResponse : responseList) {
-//			      JSONObject object;
-//				try {
-//					object = new JSONObject(thisResponse);
-//					String sku = object.getString("productId");
-//					String title = object.getString("title");
-//			        String price = object.getString("price");
-//			        String description= object.getString("description");
-//			        skus.add(sku);
-//			        titles.add(title);
-//			        prices.add(price);
-//			        descriptions.add(description);
-//			        
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			      
-//			     
-//			   }
-//			   UseElements UE= new UseElements();
-//			   
+			
+			skuList.add("One");
+			skuList.add("Five");
+//			skuList.add("zzzz");
+//			skuList.add("zzzz");
+			querySkus.putStringArrayList("ITEM_ID_LIST", skuList);
+			
+			super.onPreExecute();
+		}
+		
+		@Override
+		protected Object doInBackground(Object... paramArrayOfParams) {
+			android.os.Debug.waitForDebugger();
+			Intent bazaarList= new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND");
+//			mContext.bindService(bazaarList, mServiceConn, Context.BIND_AUTO_CREATE);
+//			mContext.startService(bazaarList);
+			
+			 if (mServiceConn != null) {
+			        try {
+						skuDetails = mService.getSkuDetails(3, getPackageName(), "inapp", querySkus);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			    }   
+			
+			
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Object result) {
+			int response = skuDetails.getInt("RESPONSE_CODE");
+			if (response == 0) {
+				ArrayList<String> responseList = skuDetails.getStringArrayList("DETAILS_LIST");
+				ArrayList<String> titles = new ArrayList<String>();
+				ArrayList<String> descriptions = new ArrayList<String>();
+				ArrayList<String> prices = new ArrayList<String>();
+				ArrayList<String> skus = new ArrayList<String>();
+				
+			   for (String thisResponse : responseList) {
+			      JSONObject object;
+				try {
+					object = new JSONObject(thisResponse);
+					String sku = object.getString("productId");
+					String title = object.getString("title");
+			        String price = object.getString("price");
+			        String description= object.getString("description");
+			        skus.add(sku);
+			        titles.add(title);
+			        prices.add(price);
+			        descriptions.add(description);
+			        
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			      
+			     
+			   }
+			   UseElements UE= new UseElements();
+			   
 //			   AA.PictureList(UE.ArrayListToStringArray(titles), UE.ArrayListToStringArray(descriptions), UE.ArrayListToStringArray(prices), lv_purchases, C);
-//			}
+			   Collections.reverse(skus);
+				Collections.reverse(titles);
+				Collections.reverse(prices);
+				Collections.reverse(descriptions);
+				ArrayList<String> sss= new ArrayList<String>(titles.subList(0, packages_num));
+				if (packages_num > skus.size()) {
+					packages_num= skus.size();
+				}
+				AA.PictureList(UE.ArrayListToStringArray(new ArrayList<String>(titles.subList(0, packages_num))), UE.ArrayListToStringArray(new ArrayList<String>(descriptions.subList(0, packages_num))), UE.ArrayListToStringArray(new ArrayList<String>(prices.subList(0, packages_num))), lv_purchases, C);
+			    skuList= skus;
+			}
+			else{
+				Appearance APP = new Appearance();
+				APP.alertWithOneButton("asdasd", "sadasdasd", MyApplicationContext.getAppContext(), R.drawable.cars, "ok");
+			}		
 //			pds.cancel();
-//			super.onPostExecute(result);
-//		}
-//		
-//	}
+			super.onPostExecute(result);
+		}
+		
+	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) { 
@@ -245,4 +275,21 @@ public class purchase extends Activity {
 	   }
 	}
 	
+	
+	public void onDestroy() {
+	   
+	    if (mServiceConn != null) {
+	    	if (mContext != null) mContext.unbindService(mServiceConn);
+            mServiceConn = null;
+            mService = null;
+            
+//	        Intent bazaarList= new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND");
+//	        stopService(bazaarList);
+//	        mContext.stopService(bazaarList);
+//	        mContext.unbindService(mServiceConn);
+//	        mServiceConn=null;
+//	        mService= null;
+	    }  
+	    super.onDestroy();
+	}
 }

@@ -203,18 +203,18 @@ public class Wizard extends Activity implements OnSeekBarChangeListener {
 						prefEditor.commit();
 					}
 					else{
-						Intent purchaseIntent = new Intent(Wizard.this, purchase.class);
+						Intent purchaseIntent = new Intent(Wizard.this, Purchases_test.class);
 						purchaseIntent.putExtra("SpinnerPosition", SpinnerPosition);
 						purchaseIntent.putExtra("CatNames", CatNames);
-						purchaseIntent.putExtra("response", getIntent().getExtras().getInt("response"));
+//						purchaseIntent.putExtra("response", getIntent().getExtras().getInt("response"));
 						purchaseIntent.putExtra("available_count", getAvailableCount(SpinnerPosition));
 						
-						if (getIntent().getExtras().getInt("response")==0) {
-							purchaseIntent.putExtra("skus", getIntent().getExtras().getStringArrayList("skus"));
-							purchaseIntent.putExtra("titles", getIntent().getExtras().getStringArrayList("titles"));
-							purchaseIntent.putExtra("prices", getIntent().getExtras().getStringArrayList("prices"));
-							purchaseIntent.putExtra("descriptions", getIntent().getExtras().getStringArrayList("descriptions"));
-						}
+//						if (getIntent().getExtras().getInt("response")==0) {
+//							purchaseIntent.putExtra("skus", getIntent().getExtras().getStringArrayList("skus"));
+//							purchaseIntent.putExtra("titles", getIntent().getExtras().getStringArrayList("titles"));
+//							purchaseIntent.putExtra("prices", getIntent().getExtras().getStringArrayList("prices"));
+//							purchaseIntent.putExtra("descriptions", getIntent().getExtras().getStringArrayList("descriptions"));
+//						}
 						
 //						startActivity(purchaseIntent);
 						startActivityForResult(purchaseIntent, 1369);
@@ -350,8 +350,9 @@ public class Wizard extends Activity implements OnSeekBarChangeListener {
 	}
 
 	
+
 	@Override
-	protected void onStart() {
+	protected void onResume() {
 		final NetWork network = new NetWork(Wizard.this);
 file = new File(Environment.getExternalStorageDirectory().toString()+"/listwithmore/xml/"+FileOperations.getNameFromLink(LINKSARRAY.get(SpinnerPosition)));
 		
