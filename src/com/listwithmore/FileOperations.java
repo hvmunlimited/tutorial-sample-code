@@ -63,4 +63,42 @@ public class FileOperations {
 			}
 		}
 	}
+
+	
+	public static void SaveFileFromLinkToSD(String link, String Directory, boolean CheckExist) {
+		String Name = getNameFromLink(link);
+		File NewFile = new File( Environment.getExternalStorageDirectory().toString()+"/"+Directory+"/"+Name);
+		if (CheckExist) {
+			if (NewFile.exists()) {
+			
+			}
+			else {
+				try {
+					FileUtils.copyURLToFile(new URL(link),NewFile);
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		else{
+			try {
+				FileUtils.copyURLToFile(new URL(link),NewFile);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+	}
+
 }
+
+

@@ -12,4 +12,9 @@
     <string name="PlzeLongClick">انگشت خود را بر روی آیتم مورد نظر بیشتر نگه دارید.</string>
     <string name="heartNegetive">حذف از مورد علاقه</string>  
     <string name="heartPositive">اضافه به مورد علاقه</string>   
+    <string name="imagesUpdateTitle">آپدیت تصاویر</string>   
+    <string name="imagesUpdateContent">نقاشی های جدیدی برای دانلود موجود می باشد، برای دانلود این نقاشی ها کلیک کنید.</string>
+    <string name="AppUpdateTitle">آپدیت برنامه</string>   
+    <string name="AppUpdateContent">برنامه نقاش خانه دارای آپدیت می باشد، برای دانلود ورژن جدید کلیک کنید.</string>   
+    <string name="purchase_notice">برای دانلود نقاشی های بیشتر نیاز به خرید یکی از بسته های افزایشی زیر دارید</string>           
 </resources>

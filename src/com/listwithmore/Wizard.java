@@ -4,19 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import android.R.integer;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.media.ExifInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
@@ -35,7 +33,6 @@ public class Wizard extends Activity implements OnSeekBarChangeListener {
 	ArrayList<String> thumbs= new ArrayList<String>();
 	UseElements SiteElements= new UseElements();
 	Button WizardBtn;
-	ProgressDialog pd;
 	AssignArray AA = new AssignArray();
 	MainPage MP= new MainPage();
 	ArrayList<String> LINKSARRAY= new ArrayList<String>();
@@ -51,7 +48,17 @@ public class Wizard extends Activity implements OnSeekBarChangeListener {
 	String OnlineDir;
 	String Path;
 	int existedItems;
+	static int FREE_NUMBERS=5;
+	View V;
+	ArrayList<String> CatNames= new ArrayList<String>();
+	
+	
+	
 
+	int id;
+	
+	
+	
 	
 
 	public void Wizard(){}
@@ -61,7 +68,7 @@ public class Wizard extends Activity implements OnSeekBarChangeListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		
-		
+	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.wizard);
 		
@@ -77,6 +84,8 @@ public class Wizard extends Activity implements OnSeekBarChangeListener {
 		Names.add(getResources().getString(R.string.name_fantasy));
 		Names.add(getResources().getString(R.string.name_flower));
 		Names.add(getResources().getString(R.string.name_people));
+		
+		CatNames= Names;
 		
 		// making list of the pictures name in drawable folder example "car"
 		ArrayList< String> PicNames = new ArrayList<String>();
@@ -137,7 +146,7 @@ public class Wizard extends Activity implements OnSeekBarChangeListener {
 		sb= (SeekBar) findViewById(R.id.sb_howMany);
 		seekbarStatus = (TextView) findViewById(R.id.tv_seekbarChanger);
 		seekbarStatus.setText("4");
-		sb.setProgress(4);
+		sb.setProgress(5);
 		sb.setOnSeekBarChangeListener(this);
 		
 		
@@ -183,59 +192,56 @@ public class Wizard extends Activity implements OnSeekBarChangeListener {
 			
 			@Override
 			public void onClick(View v) {
-				int hv= progress.progress(v, thumbs, Path ,OnlineDir);		
-				sb.setMax(thumbs.size()-hv);
+				V=v;
+				if (thumbs.size()-getAvailableCount(SpinnerPosition)+Integer.parseInt(seekbarStatus.getText().toString())>FREE_NUMBERS) {
+				int hhhh= thumbs.size()-getAvailableCount(SpinnerPosition);
+					if (thumbs.size()-getAvailableCount(SpinnerPosition)==0) {
+						seekbarStatus.setText(Integer.toString(FREE_NUMBERS));
+						int hv= progress.progress(v, thumbs, Path ,OnlineDir);		
+						sb.setMax(thumbs.size()-hv);
+						prefEditor.putInt(LINKSARRAY.get(Wizard.getSpinnerPosition()),hv);
+						prefEditor.commit();
+					}
+					else{
+						Intent purchaseIntent = new Intent(Wizard.this, purchase.class);
+						purchaseIntent.putExtra("SpinnerPosition", SpinnerPosition);
+						purchaseIntent.putExtra("CatNames", CatNames);
+						purchaseIntent.putExtra("response", getIntent().getExtras().getInt("response"));
+						purchaseIntent.putExtra("available_count", getAvailableCount(SpinnerPosition));
+						
+						if (getIntent().getExtras().getInt("response")==0) {
+							purchaseIntent.putExtra("skus", getIntent().getExtras().getStringArrayList("skus"));
+							purchaseIntent.putExtra("titles", getIntent().getExtras().getStringArrayList("titles"));
+							purchaseIntent.putExtra("prices", getIntent().getExtras().getStringArrayList("prices"));
+							purchaseIntent.putExtra("descriptions", getIntent().getExtras().getStringArrayList("descriptions"));
+						}
+						
+//						startActivity(purchaseIntent);
+						startActivityForResult(purchaseIntent, 1369);
+						
+					}
+				}
+				else{
+					int hv= progress.progress(v, thumbs, Path ,OnlineDir);		
+					sb.setMax(thumbs.size()-hv);
+					prefEditor.putInt(LINKSARRAY.get(Wizard.getSpinnerPosition()),hv);
+					prefEditor.commit();
+				}
+				
 			}
 			
 		});
 	}
 	
-//	public class UseElementsTask extends AsyncTask {
-//		UseElements SiteElements = new UseElements();
-//		
-//		@Override
-//		protected void onPreExecute() {
-//			pd= new ProgressDialog(Wizard.this);
-//			pd.setCancelable(true);
-//			pd.setMessage("در حال دریافت لیست اطلاعات قابل دانلود");
-//			pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			pd.show();
-//			super.onPreExecute();
-//		}
-//		
-//		protected Void doInBackground(Object... arg0) {
-//			android.os.Debug.waitForDebugger();
-//
-//			
-//			try {
-//				fo.SaveFileFromLinkToSD(LINK, "listwithmore/xml");
-//				thumbs= SiteElements.getElements(LINK, "thumb_url");
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			
-//			
-//			return null;
-//		}
-//		@Override
-//		protected void onPostExecute(Object result) {
-//			WizardBtn.setEnabled(true);
-//			pd.cancel();
-//			sb.setMax(getAvailableCount(SpinnerPosition));
-////			appearance.alertWithOneButton("اتمام دانلود", "دانلود فایل ها با موفقیت به پایان رسید", MyApplicationContext.getAppContext(), android.R.drawable.btn_dialog, "باشه");
-//			super.onPostExecute(result);
-//		}
-//
-//	}
+
 
 	
 	public class getDataTask extends AsyncTask{
 		int existedItems;
+		ProgressDialog pd= new ProgressDialog(Wizard.this);
 		@Override
 		protected void onPreExecute() {
-			pd= new ProgressDialog(Wizard.this);
+			
 			pd.setCancelable(true);
 			pd.setMessage("در حال بارگذاری");
 			pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -270,10 +276,13 @@ public class Wizard extends Activity implements OnSeekBarChangeListener {
 		
 	}
 	// seek bar implemented methods !
+	
 	@Override
 	public void onProgressChanged(SeekBar paramSeekBar, int progress,
 			boolean paramBoolean) {
+		int stepSize = 5;
 		TextView tv = (TextView)findViewById(R.id.tv_seekbarChanger);
+		progress = ((int)Math.round(progress/stepSize))*stepSize;
 		tv.setText(Integer.toString(progress));
 		
 	}
@@ -318,11 +327,68 @@ public class Wizard extends Activity implements OnSeekBarChangeListener {
 		Log.d("asdasd", "sadasdas");
 	}
 
-
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode== RESULT_OK && requestCode== 1369) {
+			Toast.makeText(MyApplicationContext.getAppContext(), "sadasd", Toast.LENGTH_SHORT).show();
+			
+			seekbarStatus.setText(Integer.toString(data.getExtras().getInt("number_to_download")));
+			int hv= progress.progress(V, thumbs, Path ,OnlineDir);		
+			sb.setMax(thumbs.size()-hv);
+			prefEditor.putInt(LINKSARRAY.get(Wizard.getSpinnerPosition()),hv);
+			prefEditor.commit();
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	
+	
 	@Override
 	public void onBackPressed() {
-		Log.d("back", "asdasd");
 		SpinnerPosition=0;
 		super.onBackPressed();
 	}
+
+	
+	@Override
+	protected void onStart() {
+		final NetWork network = new NetWork(Wizard.this);
+file = new File(Environment.getExternalStorageDirectory().toString()+"/listwithmore/xml/"+FileOperations.getNameFromLink(LINKSARRAY.get(SpinnerPosition)));
+		
+		
+		if (network.isOnline()) {
+			
+			
+			if (file.exists()) {
+				try {
+					thumbs = SiteElements.getElementsFromFile(file, "thumb_url");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				LINKSARRAY= MP.getLINKS();
+				sb.setMax(getAvailableCount(SpinnerPosition));
+			}
+			else {
+				WizardBtn.setEnabled(false);
+//				new UseElementsTask().execute();
+			}			
+		}
+		else {
+			if (file.exists()) {
+				try {
+					thumbs = SiteElements.getElementsFromFile(file, "thumb_url");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				LINKSARRAY= MP.getLINKS();
+				sb.setMax(getAvailableCount(SpinnerPosition));
+			}
+			WizardBtn.setEnabled(false);
+		}
+		super.onPause();
+	}
+	
+	
 }

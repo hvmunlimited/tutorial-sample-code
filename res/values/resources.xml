@@ -10,5 +10,7 @@
     <string name="people">http://tebadi.com/nagashixml/people.xml</string>
     <string name="baseDir">http://tebadi.com/nagashixml/</string>
     <string name="PathInSD">listwithmore/pictures</string>
+    <string name="imagesVersionCheck">http://tebadi.com/nagashixml/imagesversion.xml</string>
+    <string name="appVersionCheck">http://tebadi.com/nagashixml/appversion.xml</string>    
     
 </resources>

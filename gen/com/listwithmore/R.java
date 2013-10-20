@@ -14,14 +14,18 @@ public final class R {
         public static final int fade_in=0x7f040002;
         public static final int fade_out=0x7f040003;
         public static final int fade_out_in=0x7f040004;
-        public static final int move=0x7f040005;
-        public static final int rotate=0x7f040006;
-        public static final int sequential=0x7f040007;
-        public static final int slide_down=0x7f040008;
-        public static final int slide_up=0x7f040009;
-        public static final int together=0x7f04000a;
-        public static final int zoom_in=0x7f04000b;
-        public static final int zoom_out=0x7f04000c;
+        public static final int left_in=0x7f040005;
+        public static final int left_out=0x7f040006;
+        public static final int move=0x7f040007;
+        public static final int right_in=0x7f040008;
+        public static final int right_out=0x7f040009;
+        public static final int rotate=0x7f04000a;
+        public static final int sequential=0x7f04000b;
+        public static final int slide_down=0x7f04000c;
+        public static final int slide_up=0x7f04000d;
+        public static final int together=0x7f04000e;
+        public static final int zoom_in=0x7f04000f;
+        public static final int zoom_out=0x7f040010;
     }
     public static final class attr {
     }
@@ -59,19 +63,29 @@ public final class R {
         public static final int next=0x7f020010;
         public static final int people=0x7f020011;
         public static final int previous=0x7f020012;
-        public static final int whitebg=0x7f020013;
+        public static final int teaser0=0x7f020013;
+        public static final int teaser1=0x7f020014;
+        public static final int teaser2=0x7f020015;
+        public static final int teaser3=0x7f020016;
+        public static final int teaser4=0x7f020017;
+        public static final int teaser5=0x7f020018;
+        public static final int teaser6=0x7f020019;
+        public static final int teaser7=0x7f02001a;
+        public static final int teaser8=0x7f02001b;
+        public static final int whitebg=0x7f02001c;
     }
     public static final class id {
-        public static final int AddtoFav=0x7f0a0023;
-        public static final int ImageView01=0x7f0a001c;
+        public static final int AddtoFav=0x7f0a002e;
+        public static final int ImageView01=0x7f0a0028;
         public static final int Layout_Description=0x7f0a0005;
-        public static final int LinearLayout1=0x7f0a001b;
+        public static final int LinearLayout1=0x7f0a0027;
+        public static final int RelativeLayout1=0x7f0a0019;
         public static final int Relative_Layout=0x7f0a0004;
-        public static final int RemoveFromFav=0x7f0a0024;
-        public static final int RepairAllItems=0x7f0a0027;
-        public static final int RepairItem=0x7f0a0026;
-        public static final int TextView01=0x7f0a001e;
-        public static final int action_settings=0x7f0a0025;
+        public static final int RemoveFromFav=0x7f0a002f;
+        public static final int RepairAllItems=0x7f0a0032;
+        public static final int RepairItem=0x7f0a0031;
+        public static final int TextView01=0x7f0a002a;
+        public static final int action_settings=0x7f0a0030;
         public static final int btn_Favorites=0x7f0a0017;
         public static final int btn_animals=0x7f0a000f;
         public static final int btn_automobile=0x7f0a0010;
@@ -87,21 +101,31 @@ public final class R {
         public static final int gv_itemsGridView=0x7f0a0001;
         public static final int ib_next=0x7f0a0008;
         public static final int ib_previous=0x7f0a0007;
+        public static final int imageView1=0x7f0a0020;
         public static final int iv_gridlayout=0x7f0a000b;
         public static final int iv_listlayout=0x7f0a000d;
         public static final int iv_previous=0x7f0a000e;
-        public static final int iv_spinnerlayout=0x7f0a001a;
+        public static final int iv_spinnerlayout=0x7f0a0025;
         public static final int layout_MainRelativeLayout=0x7f0a0000;
-        public static final int linearLayout1=0x7f0a001d;
+        public static final int linearLayout1=0x7f0a0029;
+        public static final int lv_purchases=0x7f0a001c;
         public static final int rl_buttons=0x7f0a0006;
-        public static final int sb_howMany=0x7f0a0022;
-        public static final int sp_WitchCatagory=0x7f0a001f;
-        public static final int textView1=0x7f0a0021;
+        public static final int sb_howMany=0x7f0a002d;
+        public static final int sp_WitchCatagory=0x7f0a002b;
+        public static final int textView1=0x7f0a001b;
         public static final int text_listlayout=0x7f0a000c;
-        public static final int text_spinnerlayout=0x7f0a0019;
+        public static final int text_spinnerlayout=0x7f0a0024;
         public static final int tv_FavnoResource=0x7f0a000a;
+        public static final int tv_available_package_name=0x7f0a001a;
+        public static final int tv_description=0x7f0a001e;
         public static final int tv_noResource=0x7f0a0003;
-        public static final int tv_seekbarChanger=0x7f0a0020;
+        public static final int tv_price=0x7f0a001f;
+        public static final int tv_seekbarChanger=0x7f0a002c;
+        public static final int tv_title=0x7f0a001d;
+        public static final int txt_description=0x7f0a0022;
+        public static final int txt_price=0x7f0a0023;
+        public static final int txt_title=0x7f0a0021;
+        public static final int view_flipper=0x7f0a0026;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -110,10 +134,14 @@ public final class R {
         public static final int gridlayout=0x7f030003;
         public static final int listlayout=0x7f030004;
         public static final int mainpage=0x7f030005;
-        public static final int secondactivity=0x7f030006;
-        public static final int setting=0x7f030007;
-        public static final int spinnerlayout=0x7f030008;
-        public static final int wizard=0x7f030009;
+        public static final int purchase=0x7f030006;
+        public static final int purchaselayout=0x7f030007;
+        public static final int purchaselistlayout=0x7f030008;
+        public static final int secondactivity=0x7f030009;
+        public static final int setting=0x7f03000a;
+        public static final int spinnerlayout=0x7f03000b;
+        public static final int viewflipper=0x7f03000c;
+        public static final int wizard=0x7f03000d;
     }
     public static final class menu {
         public static final int addtofavorit=0x7f090000;
@@ -121,15 +149,18 @@ public final class R {
         public static final int repairmenu=0x7f090002;
     }
     public static final class string {
+        public static final int AppUpdateContent=0x7f050032;
+        public static final int AppUpdateTitle=0x7f050031;
         public static final int PathInSD=0x7f050021;
-        public static final int PlzeLongClick=0x7f05002a;
-        public static final int RepaitAllItems=0x7f050029;
-        public static final int RepaitItem=0x7f050028;
-        public static final int WelcomeMessage=0x7f050024;
-        public static final int action_settings=0x7f050023;
+        public static final int PlzeLongClick=0x7f05002c;
+        public static final int RepaitAllItems=0x7f05002b;
+        public static final int RepaitItem=0x7f05002a;
+        public static final int WelcomeMessage=0x7f050026;
+        public static final int action_settings=0x7f050025;
         public static final int animals=0x7f050018;
         public static final int animalsOnlineDir=0x7f050010;
-        public static final int app_name=0x7f050022;
+        public static final int appVersionCheck=0x7f050023;
+        public static final int app_name=0x7f050024;
         public static final int automobile=0x7f050019;
         public static final int automobileOnlineDir=0x7f050011;
         public static final int baseDir=0x7f050020;
@@ -137,17 +168,20 @@ public final class R {
         public static final int cartoonOnlineDir=0x7f050012;
         public static final int dionasours=0x7f05001b;
         public static final int dionasoursOnlineDir=0x7f050013;
-        public static final int download=0x7f050025;
+        public static final int download=0x7f050027;
         public static final int dragon=0x7f05001c;
         public static final int dragonOnlineDir=0x7f050014;
         public static final int fantasy=0x7f05001d;
         public static final int fantasyOnlineDir=0x7f050015;
         public static final int flowers=0x7f05001e;
         public static final int flowersOnlineDir=0x7f050016;
-        public static final int getMorePaintings=0x7f050027;
-        public static final int heartNegetive=0x7f05002b;
-        public static final int heartPositive=0x7f05002c;
-        public static final int instruction=0x7f050026;
+        public static final int getMorePaintings=0x7f050029;
+        public static final int heartNegetive=0x7f05002d;
+        public static final int heartPositive=0x7f05002e;
+        public static final int imagesUpdateContent=0x7f050030;
+        public static final int imagesUpdateTitle=0x7f05002f;
+        public static final int imagesVersionCheck=0x7f050022;
+        public static final int instruction=0x7f050028;
         public static final int name_animals=0x7f050008;
         public static final int name_automobile=0x7f050009;
         public static final int name_cartoon=0x7f05000a;
@@ -166,6 +200,7 @@ public final class R {
         public static final int pic_fantasy=0x7f050005;
         public static final int pic_flower=0x7f050006;
         public static final int pic_people=0x7f050007;
+        public static final int purchase_notice=0x7f050033;
     }
     public static final class style {
         /** 

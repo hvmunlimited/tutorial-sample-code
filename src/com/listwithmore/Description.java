@@ -62,7 +62,7 @@ public class Description extends Activity {
 		
 		
 		SelectedItemNum =getIntent().getExtras().getInt("SelectedItemNum");
-		ListPosition =getIntent().getExtras().getInt("Listposition");
+		ListPosition =getIntent().getExtras().getInt("ListPosition");
 		
 		OnlineDir =getIntent().getExtras().getString("OnlineDir");
 		RealPath= Environment.getExternalStorageDirectory().toString()+"/"+PathInSD+"/"+OnlineDir+"/"+SelectedItemNum;

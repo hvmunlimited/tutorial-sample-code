@@ -72,7 +72,7 @@ public class FaveActivity extends Activity {
 					Intent intent = new Intent(FaveActivity.this, Description.class);
 					intent.putExtra("SelectedItemNum", Integer.parseInt(Positions.get(Listposition)));
 					intent.putExtra("OnlineDir", OnlineDirs.get(Listposition));
-					intent.putExtra("Listposition", Listposition);
+					intent.putExtra("ListPosition", Listposition);
 					intent.putExtra("thumbs", UseElements.ArrayListToStringArray(names));
 					startActivityForResult(intent, 0);
 					

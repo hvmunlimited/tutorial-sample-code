@@ -1,11 +1,5 @@
 package com.listwithmore;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import android.R.drawable;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +16,7 @@ import android.widget.TextView;
 
 public class AssignArray  {
 	
+	String[] TITLES, DESCRIPTIONS,PRICES;
 	String[] PicArray, textArray;
 	String ResPath;
 	String[] ResPathArray;
@@ -243,6 +238,46 @@ public class AssignArray  {
 			}
 		};
 		// ------------------------------ Picture Grid End ---------------------------------
+
+		// ------------------------------ Picture List for purchases -------------------------------------
+		public void PictureList(String[] Titles,String[] Descriptions, String[] Prices,ListView lv_view, Context context) {
+			
+			ArrayAdapter<String> adapter= new MyListAdapterForPurchase(context, android.R.layout.simple_list_item_1, 0, Titles);
+			lv_view.setAdapter(adapter);
+			TITLES= Titles;
+			DESCRIPTIONS= Descriptions;
+			PRICES= Prices;
+			c= context;
+		}
+		
+		class MyListAdapterForPurchase extends ArrayAdapter {
+
+			@SuppressWarnings("unchecked")
+			public MyListAdapterForPurchase(Context context, int resource, int textViewResourceId,
+					Object[] objects) {
+				super(context, resource, textViewResourceId, objects);
+				// TODO Auto-generated constructor stub
+			}
+			
+			public View getView(int position, View convertView, ViewGroup parent) {
+				LayoutInflater inflater = (LayoutInflater) c.getSystemService(c.LAYOUT_INFLATER_SERVICE);
+				View row = inflater.inflate(R.layout.purchaselayout, parent, false);
+				//get resources
+
+				TextView Description = (TextView) row.findViewById(R.id.tv_description);
+				TextView Title = (TextView) row.findViewById(R.id.tv_title);
+				TextView Price = (TextView) row.findViewById(R.id.tv_price);
+
+				//set text
+				Description.setText(DESCRIPTIONS[position]);
+				Title.setText(TITLES[position]);
+				Price.setText(PRICES[position]);
+				return row;
+			}
+		};
+		
+		// ------------------------------ Picture List End ---------------------------------
+		
 
 }
 
