@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class MainActivity extends Activity {
 	SomeTests ST= new SomeTests();
 	Appearance app = new Appearance();
 	Context context;
+	ImageView iv_no_item;
 
 	
 	@Override
@@ -57,7 +59,8 @@ public class MainActivity extends Activity {
 		layout= (RelativeLayout) findViewById(R.id.layout_MainRelativeLayout);
 		gridtview = (GridView) findViewById(R.id.gv_itemsGridView);
 		gridtview.setLongClickable(true);
-		
+		iv_no_item = (ImageView) findViewById(R.id.iv_no_item);
+		iv_no_item.setVisibility(View.INVISIBLE);
 
 		super.onCreate(savedInstanceState);
 		id = getIntent().getExtras().getInt("id");
@@ -100,6 +103,11 @@ public class MainActivity extends Activity {
 		
 		if (file.exists()) {
 			ExistedItems= prefs.getInt(LINK, 0);
+			//set visiblity to show there is no item in a category
+			if (ExistedItems==0) {
+				gridtview.setVisibility(View.INVISIBLE);
+				iv_no_item.setVisibility(View.VISIBLE);
+			}
 //------------------------------ start for main layout -----------------
 
 
@@ -174,12 +182,13 @@ public class MainActivity extends Activity {
 			
 
 		else {
+			// if with no connection user go to our page
 			gridtview.setVisibility(View.INVISIBLE);
-			TextView tv_noResource = (TextView) findViewById(R.id.tv_noResource);
-			tv_noResource.setText("داده های نمونه موجود نمی باشد");
-			tv_noResource.setVisibility(View.VISIBLE);
+			iv_no_item.setVisibility(View.VISIBLE);
 
 		}
+		
+		
 // ---------------------- main layout End -------------------
 
 		

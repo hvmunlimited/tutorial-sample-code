@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Lightblue"
     android:gravity="right"
     android:orientation="horizontal" >
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
+        android:layout_height="141dp"
+        android:layout_gravity="top"
+        android:layout_margin="10dp"
         android:orientation="vertical" >
 
         <TextView
@@ -16,6 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="25dp"
             android:text="title"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -23,12 +27,14 @@
             android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:text="Description" />
 
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:text="price"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -36,9 +42,12 @@
 
     <ImageView
         android:id="@+id/iv_listlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_launcher" />
+        android:layout_width="52dp"
+        android:layout_height="144dp"
+        android:layout_gravity="top"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/drawing" />
 
 </LinearLayout>

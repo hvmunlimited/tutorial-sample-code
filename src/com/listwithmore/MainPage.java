@@ -19,6 +19,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -320,6 +323,34 @@ public class MainPage extends Activity  {
 //	    if (mServiceConn != null) {
 //	        unbindService(mServiceConn);
 //	    }   
+	}
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id=item.getItemId();
+		switch (id) {
+		case R.id.action_help:
+			Intent Helpintent= new Intent(MainPage.this, Introduction.class);
+			prefEditor.putBoolean("isFirst", true);
+			prefEditor.commit();
+			startActivity(Helpintent);
+			break;
+		case R.id.action_about_us:
+			Intent Aboutintent= new Intent(MainPage.this, About_us_Activity.class);
+			startActivity(Aboutintent);
+			break;
+		case R.id.action_littl_facts:
+			
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }
 	

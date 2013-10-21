@@ -20,15 +20,12 @@
 
     </GridView>
 
-    <TextView
-        android:id="@+id/tv_FavnoResource"
+    <ImageView
+        android:id="@+id/iv_no_fave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:visibility="invisible" />
+        android:layout_centerVertical="true"
+        android:src="@drawable/no_fave" />
 
 </RelativeLayout>

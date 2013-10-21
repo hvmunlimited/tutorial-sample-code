@@ -49,14 +49,14 @@ public class Purchases_test extends Activity {
 		skuList.add("Five");
 		
 		//----
-		titles.add("One");
-		titles.add("Five");
+		titles.add("بسته پنج تایی");
+		titles.add("بسته ده تایی");
 		//----
-		descriptions.add("One");
-		descriptions.add("Five");
+		descriptions.add("پس از دریافت این بسته، 5 عدد آموزش جدید برای دانلود برای شما باز خواهد شد");
+		descriptions.add("پس از دریافت این بسته، 10 عدد آموزش جدید برای دانلود برای شما باز خواهد شد");
 		//----
-		prices.add("One");
-		prices.add("Five");		
+		prices.add("100 تومان");
+		prices.add("180 تومان");		
 		// end of initializing skulist arraylist // ------------------------------------
 		
 		super.onCreate(savedInstanceState);

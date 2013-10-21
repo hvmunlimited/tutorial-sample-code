@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class FaveActivity extends Activity {
@@ -39,13 +40,15 @@ public class FaveActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		final NetWork network = new NetWork(FaveActivity.this);
 		gridview = (GridView) findViewById(R.id.gv_FaveitemsGridView);
-		TextView NoFave= (TextView) findViewById(R.id.tv_FavnoResource);
+		ImageView iv_no_fave = (ImageView) findViewById(R.id.iv_no_fave);
+
 		
 		PathInSD= getResources().getString(R.string.PathInSD);
 		
 		
 		f= new File(Environment.getExternalStorageDirectory().toString()+"/"+PathInSD+"/favorite.xml");
 		if (hasFave()) {
+			iv_no_fave.setVisibility(View.INVISIBLE);
 			try {
 				thumbs = UE.getElementsFromFile(f, "thumb_url");
 				XMLS = UE.getElementsFromFile(f, "xmlfile");
@@ -82,7 +85,7 @@ public class FaveActivity extends Activity {
 			
 		}
 		else {
-			NoFave.setVisibility(View.VISIBLE);
+			iv_no_fave.setVisibility(View.VISIBLE);
 		}
 				
 			

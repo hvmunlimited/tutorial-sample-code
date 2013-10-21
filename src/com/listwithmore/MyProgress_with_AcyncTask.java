@@ -16,7 +16,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class MyProgress {
+public class MyProgress_with_AcyncTask {
 	// ---------------- progress bar example variables 
 		ProgressDialog progressBar;
 		Handler progressBarHandler = new Handler();
@@ -70,135 +70,162 @@ public class MyProgress {
 			DownloadListLength= DownloadList.size();
 			ONLINEDIR= OnlineDir;
 			progressBar = new ProgressDialog(v.getContext());
-			progressBar.setCancelable(true);
-			progressBar.setMessage("Downloading ... ");
-			progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-			progressBar.setProgress(0);
-			progressBar.setMax(requestNum);
-			progressBar.show();
-			progressBar.setCancelable(true);
 			
-				 progressBarStatus = 0;
 				 fileSize=previousNum;
-				 
-					
+				 new downloadTask().execute();
 				
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						
-
-						while (progressBarStatus<requestNum) {
-							progressBarStatus = doSomeTask();
-							
-							LINKSARRAY = MP.getLINKS();
-							
-//							editor.putInt(LINKSARRAY.get(Wizard.getSpinnerPosition()),multiple);
-//							editor.commit();
-							
-							
-							progressBarHandler.post(new Runnable() {
-								
-								@Override
-								public void run() {
-									progressBar.setProgress(progressBarStatus);
-									
-								}
-							});
-						};
-								
-
-						if (progressBarStatus >= requestNum) {
-							
-							progressBar.dismiss();
-						}
-						
-						
-					}
-
-					
-				}).start();
 				return multiple;
 			}
-	
-	private int doSomeTask() {
 		
-		
-		ArrayList<ArrayList<String>> Dirs= UE.getDirProperty(MyApplicationContext.getAppContext().getResources().getString(R.string.baseDir)+"index.php?dir=pictures%2F"+ONLINEDIR+"%2F");
-		ArrayList<String> DirNames= Dirs.get(0);
-		ArrayList<String> picurlss = new ArrayList<String>();
-//		ArrayList<String> pictureName = new ArrayList<String>();
-		List<String> DirUrls= Dirs.get(1);
-		for (int i = 0; i < DirUrls.size(); i++) {
-			ArrayList<ArrayList<String>> Pics;
-				try {
-					Pics = UE.getPicProperty(DirUrls.get(i));
-				} catch (Exception e1) {
-					return -1;
-				}
-			picurlss= Pics.get(1);
-
-			try {
-				PICURLS.add(i,picurlss);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				PICURLS.add(picurlss);
+		public class downloadTask extends AsyncTask {
+			@Override
+			protected void onPreExecute() {
+				
+				progressBar.setCancelable(true);
+				progressBar.setMessage("Downloading ... ");
+				progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+				progressBar.setProgress(0);
+				progressBar.setMax(requestNum);
+				progressBar.show();
+				progressBar.setCancelable(true);
+				
+					 progressBarStatus = 0;
+				super.onPreExecute();
 			}
-//			pictureName= Pics.get(0);
-//			PICNAMES.add(pictureName);
 			
-			
-		}
-		
-	
-		if (fileSize>=previousNum && fileSize <multiple) {
-			String itemToDownload = DownloadItems.get(fileSize).replaceAll("\\s", "");
-			FileOperations.SaveFileFromLinkToSD(itemToDownload, path+"/"+ONLINEDIR);
-			
-			int i = fileSize;
-				for (int j = 0; j < PICURLS.get(i).size(); j++) {
-					itemToDownload = PICURLS.get(i).get(j).replaceAll("\\s", "");
-					FileOperations.SaveFileFromLinkToSD(itemToDownload, path+"/"+ONLINEDIR+"/"+fileSize);
+			@Override
+			protected Object doInBackground(Object... arg0) {
+//				android.os.Debug.waitForDebugger();
+				
+				ArrayList<ArrayList<String>> Dirs= UE.getDirProperty(MyApplicationContext.getAppContext().getResources().getString(R.string.baseDir)+"index.php?dir=pictures%2F"+ONLINEDIR+"%2F");
+				ArrayList<String> DirNames= Dirs.get(0);
+				ArrayList<String> picurlss = new ArrayList<String>();
+//				ArrayList<String> pictureName = new ArrayList<String>();
+				
+				List<String> DirUrls= Dirs.get(1);
+				for (int i = 0; i < DirUrls.size(); i++) {
+					ArrayList<ArrayList<String>> Pics = null;
+					try {
+						Pics = UE.getPicProperty(DirUrls.get(i));
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						progressBarStatus=-1;
 						
-					FileOutputStream FOS = null;
-					DetailFile= new File(Environment.getExternalStorageDirectory().toString()+"/"+path+"/"+ONLINEDIR+"/"+fileSize+"/picdetails.xml"); 
+					}
 					
-					if (j==0) {
-						try {
-							FOS = new FileOutputStream(DetailFile,false);
-						} catch (FileNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+					if (progressBarStatus== -1) {
+						trys++;
+						if (trys== 30) {
+							// set progressBarStatus to cancell the request
+							progressBarStatus=requestNum;
 						}
+						else{
+							try {
+								Pics = UE.getPicProperty(DirUrls.get(i));
+								progressBarStatus=0;
+							} catch (Exception e1) {
+							}
+						}
+//						progressBar.cancel();
 					}
 					else{
+						picurlss= Pics.get(1);
 						try {
-							FOS = new FileOutputStream(DetailFile,true);
-						} catch (FileNotFoundException e) {
+							PICURLS.add(i,picurlss);
+						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							PICURLS.add(picurlss);
 						}
+	//					pictureName= Pics.get(0);
+	//					PICNAMES.add(pictureName);
 					}
-						byte[] StringToAppen =("<pic>\n"+fo.getNameFromLink(itemToDownload)+"\n</pic>\n").getBytes();
-						try {
-							FOS.write(StringToAppen);
-							FOS.flush();
-						FOS.close();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					
+				}
+				
+			
+				if (fileSize>=previousNum && fileSize <multiple) {
+					String itemToDownload = DownloadItems.get(fileSize).replaceAll("\\s", "");
+					FileOperations.SaveFileFromLinkToSD(itemToDownload, path+"/"+ONLINEDIR);
+					
+					int i = fileSize;
+					for (int l = 0; l < PICURLS.size(); l++) {
 						
 					
-				}			
-			fileSize++;
-			progress++;
-			return progress;
+						for (int j = 0; j < PICURLS.get(i).size(); j++) {
+							itemToDownload = PICURLS.get(i).get(j).replaceAll("\\s", "");
+							FileOperations.SaveFileFromLinkToSD(itemToDownload, path+"/"+ONLINEDIR+"/"+fileSize);
+								
+							FileOutputStream FOS = null;
+							DetailFile= new File(Environment.getExternalStorageDirectory().toString()+"/"+path+"/"+ONLINEDIR+"/"+fileSize+"/picdetails.xml"); 
+							
+							if (j==0) {
+								try {
+									FOS = new FileOutputStream(DetailFile,false);
+								} catch (FileNotFoundException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							else{
+								try {
+									FOS = new FileOutputStream(DetailFile,true);
+								} catch (FileNotFoundException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+								byte[] StringToAppen =("<pic>\n"+fo.getNameFromLink(itemToDownload)+"\n</pic>\n").getBytes();
+								try {
+									FOS.write(StringToAppen);
+									FOS.flush();
+								FOS.close();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								
+								
+						}	
+					
+					fileSize++;
+					progress++;
+					publishProgress(progress);
+					}
 
+				}
+				
+				
+				return null;
+			}
+			
+			@Override
+			protected void onProgressUpdate(Object... values) {
+				
+					progressBarStatus = (Integer) values[0];
+
+					
+					LINKSARRAY = MP.getLINKS();
+					
+//					editor.putInt(LINKSARRAY.get(Wizard.getSpinnerPosition()),multiple);
+//					editor.commit();
+					
+					progressBar.setProgress(progressBarStatus);
+					super.onProgressUpdate(values);
+					
+			};
+						
+
+			 @Override
+			protected void onPostExecute(Object result) {
+				 if (progressBarStatus >= requestNum) {
+						
+						progressBar.dismiss();
+					}
+				super.onPostExecute(result);
+			}
+			
 		}
-		
-		return 100;
-	}
+	
 	
 	
 	

@@ -2,4 +2,7 @@
 <resources>
         <color name="blue">#8E96FF</color>
     <color name="white">#FFFFFF</color>
+    <color name="Lightpurple">#F7C6FB</color>
+    <color name="Lightblue">#B7B9FF</color>
+    
 </resources>

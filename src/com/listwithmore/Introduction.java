@@ -33,8 +33,8 @@ public class Introduction extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean isFirst= prefs.getBoolean("isFirst", false);
-        if (isFirst) {
+        boolean isFirst= prefs.getBoolean("isFirst", true);
+        if (!isFirst) {
         	Intent intent= new Intent(Introduction.this, MainPage.class);
 			startActivity(intent);
 			finish();
@@ -82,8 +82,8 @@ public class Introduction extends Activity{
 									Intent intent= new Intent(Introduction.this, MainPage.class);
 									startActivity(intent);
 									finish();
-//									prefEditor.putBoolean("isFirst", false);
-									prefEditor.putBoolean("isFirst", true);
+									prefEditor.putBoolean("isFirst", false);
+//									prefEditor.putBoolean("isFirst", true);
 									
 									prefEditor.commit();
 								}
@@ -111,5 +111,12 @@ public class Introduction extends Activity{
 
                     return false;
             }
+    }
+    
+    @Override
+    public void onBackPressed() {
+    	prefEditor.putBoolean("isFirst", false);
+    	prefEditor.commit();
+    	super.onBackPressed();
     }
 }

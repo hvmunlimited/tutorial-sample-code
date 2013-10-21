@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">نقاش خانه</string>
-    <string name="action_settings">تنظیمات</string>
+    <string name="action_help">راهنما</string>
+    <string name="action_about_us">درباره ما</string>
+    <string name="action_littl_facts">حقایقی کوچک</string>
     <string name="WelcomeMessage"> .برنامه برای راه اندازی شدن نیاز به نصب اولیه اطلاعات نمونه دارد. لطفا ارتباط خود را با اینترنت برقرار نمایید تا برنامه گوشه ای از اطلاعات  را در بسته اولیه دانلود نماید. شما بعدا خواهید توانست داده های بیشتری را از طریق سرور برنامه دریافت نمایید و به صورت تدریجی اطلاعات برنامه خود را در هر هنگام که نیاز دارید آپدیت نمایید</string>
     <string name="download">دانلود</string>
     <string name="instruction">برای دریافت اطلاعات اولیه بر روی دکمه زیر کلیک نمایید تا برنامه اطلاعات اولیه را از سرور های برنامه دریافت نموده و بر روی نرم افزار شما ثبت نماید</string>
@@ -16,5 +18,6 @@
     <string name="imagesUpdateContent">نقاشی های جدیدی برای دانلود موجود می باشد، برای دانلود این نقاشی ها کلیک کنید.</string>
     <string name="AppUpdateTitle">آپدیت برنامه</string>   
     <string name="AppUpdateContent">برنامه نقاش خانه دارای آپدیت می باشد، برای دانلود ورژن جدید کلیک کنید.</string>   
-    <string name="purchase_notice">برای دانلود نقاشی های بیشتر نیاز به خرید یکی از بسته های افزایشی زیر دارید</string>           
+    <string name="purchase_notice">برای دانلود نقاشی های بیشتر نیاز به خرید یکی از بسته های افزایشی زیر دارید</string>   
+    <string name="About">برنامه نویسی شده توسط تیم پنج نقش ایرانیان \\n تماس با ما : \\n 09354230134</string>           
 </resources>
